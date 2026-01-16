@@ -1,3 +1,15 @@
 spring:
   application:
     name: example
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: andruf
+    password: changemeinprod
+    driver-class-name: org.postgresql.Driver
+  docker:
+    compose:
+      file: /home/andruf/Work/IdeaProjects/example/example/docker-compose.yaml
+  jpa:
+    hibernate:
+      ddl-auto: update
+

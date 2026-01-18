@@ -1,6 +1,6 @@
 package com.springdb.example.web;
 
-import com.springdb.example.entities.Car;
+import com.springdb.example.dtos.CarDto;
 import com.springdb.example.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,23 +14,23 @@ public class CarController {
     private final CarService carService;
 
     @GetMapping
-    public List<Car> getAll() {
+    public List<CarDto> getAll() {
         return carService.getAllCars();
     }
 
     @PostMapping
-    public Car create(@RequestBody Car car) {
-        return carService.saveCar(car);
+    public CarDto create(@RequestBody CarDto carDto) {
+        return carService.saveCar(carDto);
     }
 
     @GetMapping("/{id}")
-    public Car getById(@PathVariable Long id) {
+    public CarDto getById(@PathVariable Long id) {
         return carService.getCarById(id);
     }
 
     @PutMapping("/{id}")
-    public Car update(@PathVariable Long id, @RequestBody Car car) {
-        return carService.updateCar(id, car);
+    public CarDto update(@PathVariable Long id, @RequestBody CarDto carDto) {
+        return carService.updateCar(id, carDto);
     }
 
     @DeleteMapping("/{id}")

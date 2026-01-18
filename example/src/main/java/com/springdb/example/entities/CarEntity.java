@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Car extends Vehicle {
+public class CarEntity extends VehicleEntity {
     private Integer seatingCapacity;
 }

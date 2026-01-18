@@ -12,4 +12,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+app:
+  repository.type: jpa
 

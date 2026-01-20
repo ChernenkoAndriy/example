@@ -3,9 +3,12 @@ package com.springdb.example.web;
 import com.springdb.example.dtos.CarDto;
 import com.springdb.example.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/cars")
@@ -36,5 +39,10 @@ public class CarController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         carService.deleteCar(id);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleNotFound(NoSuchElementException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

@@ -12,6 +12,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  flyway:
+    clean-disabled: false
 app:
   repository.type: jpa
-

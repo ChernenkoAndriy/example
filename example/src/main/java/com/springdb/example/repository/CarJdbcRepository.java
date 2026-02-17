@@ -35,7 +35,6 @@ public class CarJdbcRepository implements IRepository<CarEntity> {
     public List<CarEntity> findAll() {
         String sql = "SELECT v.id, v.brand, v.model, c.seating_capacity " +
                 "FROM vehicle_entity v JOIN car_entity c ON v.id = c.id";
-        System.out.println("JDBC");
         return jdbcTemplate.query(sql, carRowMapper);
     }
 

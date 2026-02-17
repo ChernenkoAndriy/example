@@ -1,4 +1,3 @@
--- Важливо: не видаляємо flyway_schema_history!
 DROP TABLE IF EXISTS car_entity;
 DROP TABLE IF EXISTS truck_entity;
 DROP TABLE IF EXISTS vehicle_entity;

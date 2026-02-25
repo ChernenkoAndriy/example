@@ -39,15 +39,13 @@ public class DataSourceConfig {
 
     @Bean
     @Primary
-    public DataSource dataSource(
-            @Qualifier("primaryDataSource") DataSource primary,
-            @Qualifier("replicaDataSource") DataSource replica) {
+    public DataSource dataSource() {
         RoutingDataSource routingDataSource = new RoutingDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DataSourceType.PRIMARY, primary);
-        targetDataSources.put(DataSourceType.REPLICA, replica);
+        targetDataSources.put(DataSourceType.PRIMARY, primaryDataSource());
+        targetDataSources.put(DataSourceType.REPLICA, replicaDataSource());
         routingDataSource.setTargetDataSources(targetDataSources);
-        routingDataSource.setDefaultTargetDataSource(primary);
+        routingDataSource.setDefaultTargetDataSource(primaryDataSource());
         return routingDataSource;
     }
 }

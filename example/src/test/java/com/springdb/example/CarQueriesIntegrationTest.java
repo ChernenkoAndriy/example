@@ -91,13 +91,12 @@ class CarQueriesIntegrationTest extends AbstractIntegrationTest {
     @ParameterizedTest
     @MethodSource("queryStrategies")
     void shouldVerifyHaving(CarQueries strategy) {
-        saveCar("Toyota", "Corolla", 5); // Додаємо ще одну Toyota
+        saveCar("Toyota", "Corolla", 5);
 
         List<Object[]> results = strategy.groupByBrandHaving(1L);
 
         assertEquals(1, results.size(), "Failed for strategy: " + strategy.getClass().getSimpleName());
         assertEquals("Toyota", results.get(0)[0]);
-        // Перевіряємо Count (може бути Long або Integer залежно від стратегії)
         assertTrue(Integer.parseInt(results.get(0)[1].toString()) > 1);
     }
 

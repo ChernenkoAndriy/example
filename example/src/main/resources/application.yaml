@@ -2,10 +2,16 @@ spring:
   application:
     name: example
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: andruf
-    password: changemeinprod
-    driver-class-name: org.postgresql.Driver
+    primary:
+      jdbc-url: jdbc:postgresql://localhost:5432/sezdb
+      username: andruf
+      password: andruf
+      driver-class-name: org.postgresql.Driver
+    replica:
+      jdbc-url: jdbc:postgresql://localhost:5433/sezdb
+      username: andruf
+      password: andruf
+      driver-class-name: org.postgresql.Driver
   docker:
     compose:
       file: /home/andruf/Work/IdeaProjects/example/example/docker-compose.yaml

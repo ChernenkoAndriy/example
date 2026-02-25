@@ -1,9 +1,25 @@
 services:
-  postgres:
-    image: 'postgres:latest'
+  db-primary:
+    image: postgres:15-alpine
     environment:
-      - 'POSTGRES_DB=postgres'
-      - 'POSTGRES_PASSWORD=changemeinprod'
-      - 'POSTGRES_USER=andruf'
+      - POSTGRES_DB=sezdb
+      - POSTGRES_USER=andruf
+      - POSTGRES_PASSWORD=andruf
+    command: |
+      postgres 
+      -c wal_level=replica 
+      -c max_wal_senders=10 
+      -c max_replication_slots=10
     ports:
-      - '5432:5432'
+      - "5432:5432"
+
+  db-replica:
+    image: postgres:15-alpine
+    depends_on:
+      - db-primary
+    environment:
+      - POSTGRES_DB=sezdb
+      - POSTGRES_USER=andruf
+      - POSTGRES_PASSWORD=andruf
+    ports:
+      - "5433:5432"

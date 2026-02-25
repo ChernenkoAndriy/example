@@ -3,15 +3,21 @@ spring:
     name: example
   datasource:
     primary:
-      jdbc-url: jdbc:postgresql://localhost:5432/sezdb
-      username: andruf
-      password: andruf
-      driver-class-name: org.postgresql.Driver
+      hikari:
+        jdbc-url: jdbc:postgresql://localhost:5432/sezdb
+        username: andruf
+        password: andruf
+        driver-class-name: org.postgresql.Driver
+        connection-timeout: 2000
+        maximum-pool-size: 10
     replica:
-      jdbc-url: jdbc:postgresql://localhost:5433/sezdb
-      username: andruf
-      password: andruf
-      driver-class-name: org.postgresql.Driver
+      hikari:
+        jdbc-url: jdbc:postgresql://localhost:5433/sezdb
+        username: andruf
+        password: andruf
+        driver-class-name: org.postgresql.Driver
+        connection-timeout: 2000
+        maximum-pool-size: 10
   docker:
     compose:
       file: /home/andruf/Work/IdeaProjects/example/example/docker-compose.yaml

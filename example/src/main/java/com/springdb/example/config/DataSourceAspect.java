@@ -1,5 +1,6 @@
 package com.springdb.example.config;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -14,9 +15,14 @@ public class DataSourceAspect {
     @Before("@annotation(transactional)")
     public void setDataSourceContext(Transactional transactional) {
         if (transactional.readOnly()) {
-            DataSourceContextHolder.setBranchContext(DataSourceType.PRIMARY);
-        } else {
             DataSourceContextHolder.setBranchContext(DataSourceType.REPLICA);
+        } else {
+            DataSourceContextHolder.setBranchContext(DataSourceType.PRIMARY);
         }
+    }
+
+    @After("@annotation(transactional)")
+    public void clear() {
+        DataSourceContextHolder.clear();
     }
 }

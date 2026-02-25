@@ -1,5 +1,7 @@
 package com.springdb.example.service.transactions;
 
+import com.springdb.example.config.DataSourceContextHolder;
+import com.springdb.example.config.DataSourceType;
 import com.springdb.example.entities.CarEntity;
 import com.springdb.example.repository.JpaCarRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +19,19 @@ public class TransactionHelperService {
     public boolean externalTransactionalMethod(CarEntity car) {
         repository.save(car);
         return TransactionSynchronizationManager.isActualTransactionActive();
+    }
+
+    @Transactional
+    public void executeWithDelay(long ms) {
+        DataSourceContextHolder.setBranchContext(DataSourceType.PRIMARY);
+        repository.count();
+
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            DataSourceContextHolder.clear();
+        }
     }
 }

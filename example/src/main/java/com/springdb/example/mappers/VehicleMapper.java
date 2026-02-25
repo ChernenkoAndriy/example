@@ -13,6 +13,7 @@ public class VehicleMapper {
         if (entity == null) return null;
         CarDto dto = new CarDto();
         dto.setId(entity.getId());
+        dto.setNumber(entity.getNumber());
         dto.setBrand(entity.getBrand());
         dto.setModel(entity.getModel());
         dto.setSeatingCapacity(entity.getSeatingCapacity());
@@ -23,6 +24,7 @@ public class VehicleMapper {
         if (dto == null) return null;
         CarEntity entity = new CarEntity();
         entity.setId(dto.getId());
+        entity.setNumber(dto.getNumber());
         entity.setBrand(dto.getBrand());
         entity.setModel(dto.getModel());
         entity.setSeatingCapacity(dto.getSeatingCapacity());
@@ -33,6 +35,7 @@ public class VehicleMapper {
         if (entity == null) return null;
         TruckDto dto = new TruckDto();
         dto.setId(entity.getId());
+        dto.setNumber(entity.getNumber());
         dto.setBrand(entity.getBrand());
         dto.setModel(entity.getModel());
         dto.setPayloadCapacity(entity.getPayloadCapacity());
@@ -43,6 +46,7 @@ public class VehicleMapper {
         if (dto == null) return null;
         TruckEntity entity = new TruckEntity();
         entity.setId(dto.getId());
+        entity.setNumber(dto.getNumber());
         entity.setBrand(dto.getBrand());
         entity.setModel(dto.getModel());
         entity.setPayloadCapacity(dto.getPayloadCapacity());

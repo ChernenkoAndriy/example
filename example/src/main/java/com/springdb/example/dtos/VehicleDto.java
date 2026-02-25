@@ -11,4 +11,5 @@ public abstract class VehicleDto {
     private Long id;
     private String brand;
     private String model;
+    private String number;
 }

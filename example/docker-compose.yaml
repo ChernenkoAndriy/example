@@ -12,7 +12,6 @@ services:
       -c max_replication_slots=10
     ports:
       - "5432:5432"
-
   db-replica:
     image: postgres:15-alpine
     depends_on:
@@ -23,3 +22,11 @@ services:
       - POSTGRES_PASSWORD=andruf
     ports:
       - "5433:5432"
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password

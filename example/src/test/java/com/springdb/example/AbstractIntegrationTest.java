@@ -13,10 +13,11 @@ import java.io.File;
 @AutoConfigureMockMvc
 public abstract class AbstractIntegrationTest {
 
-    static final DockerComposeContainer<?> environment =
+    protected static final DockerComposeContainer<?> environment =
             new DockerComposeContainer<>(new File("docker-compose.yaml"))
                     .withExposedService("db-primary", 5432, Wait.forListeningPort())
                     .withExposedService("db-replica", 5432, Wait.forListeningPort())
+                    .withExposedService("redis-sentinel", 26379, Wait.forListeningPort())
                     .withExposedService("mongodb", 27017,
                             Wait.forLogMessage(".*Waiting for connections.*\\n", 1));
 

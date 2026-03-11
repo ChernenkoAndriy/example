@@ -30,3 +30,26 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
+
+  redis-master:
+    image: redis:latest
+    ports:
+      - "6379"
+
+  redis-slave:
+      image: redis:latest
+      command: redis-server --slaveof redis-master 6379
+      depends_on:
+        - redis-master
+
+  redis-sentinel:
+      image: bitnami/redis-sentinel:latest
+      environment:
+        - REDIS_MASTER_NAME=mymaster
+        - REDIS_MASTER_HOST=redis-master
+        - REDIS_SENTINEL_QUORUM=1
+      ports:
+        - "26379"
+      depends_on:
+        - redis-master
+        - redis-slave
